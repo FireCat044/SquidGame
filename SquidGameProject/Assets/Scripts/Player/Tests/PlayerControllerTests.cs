@@ -199,14 +199,15 @@ public class PlayerControllerTests
     public void GetGizmoDrawParameters_WhenGrounded_ReturnsGreenColor()
     {
         // Arrange
-        Color expectedColor = new Color(0.0f, 1.0f, 0.0f, 0.35f); // transparentGreen
+        // Намеренно задаем неверный ожидаемый цвет, чтобы тест провалился
+        Color expectedColor = new Color(1.0f, 0.0f, 0.0f, 0.35f); // Ожидаем красный вместо зеленого
         typeof(PlayerController).GetField("Grounded", BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(_playerController, true);
 
         // Act
         var (color, _, _) = _playerController.GetGizmoDrawParameters();
 
         // Assert
-        Assert.AreEqual(expectedColor, color, "Color should be transparentGreen when Grounded is true.");
+        Assert.AreEqual(expectedColor, color, "Color should be transparentGreen when Grounded is true."); // Этот тест провалится
     }
 
     [Test]
